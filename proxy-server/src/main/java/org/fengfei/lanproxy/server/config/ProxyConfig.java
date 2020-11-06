@@ -39,7 +39,14 @@ public class ProxyConfig implements Serializable {
     static {
 
         // 代理配置信息存放在用户根目录下
-        String dataPath = System.getProperty("user.home") + "/" + ".lanproxy/";
+    	String dataPathConfig = Config.getInstance().getStringValue("config.path");
+    	String dataPath = "";
+    	if(!"".equals(dataPathConfig)){
+    		dataPath = dataPathConfig;
+    	}else{
+    		dataPath = System.getProperty("user.home") + "/" + ".lanproxy/";
+    	}
+        
         File file = new File(dataPath);
         if (!file.isDirectory()) {
             file.mkdir();
